@@ -768,4 +768,163 @@ function generate_update_logo_setting()
 		update_option( 'generate_settings', $update_settings );
 	endif;
 }
+
+
+//
+// Ниже - новые функции EDU~NET
+//
+//
+//
+
+
+// Изменяем раскраску сайта
+
+add_filter( 'generate_color_option_defaults', 'edunet_color_customizer', 10, 1 );
+
+function edunet_color_customizer( $default_color ) 
+{
+
+    $c1 = array( '#F57C71', '#F59179', '#F4AA75', '#FCC87B', '#FBF587', '#AFD78D', '#67C297', '#58C6C7', '#5F8CC7', '#5967B2', '#826DB2', '#BF80B7' );
+    $c2 = array( '#EE1C25', '#ED423D', '#F48625', '#F8A81B', '#FDF001', '#74C046', '#02A762', '#00AEAF', '#0367B3', '#22429C', '#5B3197', '#A62291' );
+    $c3 = array( '#BB1219', '#ED423D', '#C46B19', '#C38611', '#CDC000', '#599C35', '#008A4E', '#018D8E', '#015090', '#182F80', '#4B1D79', '#850C73' );
+    $c4 = array( '#930305', '#9B2E1F', '#9D5106', '#9E6A02', '#A49901', '#417C2A', '#006E3D', '#007172', '#013E75', '#081C66', '#39075E', '#6B015D' );
+
+    $delta = 8;
+
+    $base = $c2[ $delta % 12 ];      //Шапка, ссылки
+    $base_hover = $c4[ $delta % 12 ]; 
+    $base2 = $c2[ ($delta + 6) % 12 ];
+    $base2_hover = $c4[ ($delta + 6) % 12 ]; 
+
+    $edunet_color = array(
+			'header_background_color' => '#FFFFFF',
+			'header_text_color' => '#3a3a3a',
+			'header_link_color' => '#3a3a3a',
+			'header_link_hover_color' => '',
+			'site_title_color' => '#222222',
+			'site_tagline_color' => '#999999',
+			'navigation_background_color' => $base,
+			'navigation_text_color' => '#FFFFFF',
+			'navigation_background_hover_color' => $base_hover,
+			'navigation_text_hover_color' => '#FFFFFF',
+			'navigation_background_current_color' => $base2,
+			'navigation_text_current_color' => '#FFFFFF',
+			'subnavigation_background_color' => '#3f3f3f',
+			'subnavigation_text_color' => '#FFFFFF',
+			'subnavigation_background_hover_color' => '#4f4f4f',
+			'subnavigation_text_hover_color' => '#FFFFFF',
+			'subnavigation_background_current_color' => '#4f4f4f',
+			'subnavigation_text_current_color' => '#FFFFFF',
+			'content_background_color' => '#FFFFFF',
+			'content_text_color' => '',
+			'content_link_color' => $base,
+			'content_link_hover_color' => $base_hover,
+			'content_title_color' => '',
+			'blog_post_title_color' => '',
+			'blog_post_title_hover_color' => '',
+			'entry_meta_text_color' => '#888888',
+			'entry_meta_link_color' => '#666666',
+			'entry_meta_link_color_hover' => '#1ba0e1',
+			'h1_color' => '',
+			'h2_color' => '',
+			'h3_color' => '',
+			'sidebar_widget_background_color' => '#FFFFFF',
+			'sidebar_widget_text_color' => '',
+			'sidebar_widget_link_color' => $base,
+			'sidebar_widget_link_hover_color' => $base_hover,
+			'sidebar_widget_title_color' => '#000000',
+			'footer_widget_background_color' => '#FFFFFF',
+			'footer_widget_text_color' => '',
+			'footer_widget_link_color' => $base,
+			'footer_widget_link_hover_color' => $base_hover,
+			'footer_widget_title_color' => '#000000',
+			'footer_background_color' => '#222222',
+			'footer_text_color' => '#ffffff',
+			'footer_link_color' => '#ffffff',
+			'footer_link_hover_color' => '#606060',
+			'form_background_color' => '#FAFAFA',
+			'form_text_color' => '#666666',
+			'form_background_color_focus' => '#FFFFFF',
+			'form_text_color_focus' => '#666666',
+			'form_border_color' => '#CCCCCC',
+			'form_border_color_focus' => '#BFBFBF',
+			'form_button_background_color' => $base2,
+			'form_button_background_color_hover' => $base2_hover,
+			'form_button_text_color' => '#FFFFFF',
+			'form_button_text_color_hover' => '#FFFFFF'
+		);
+
+	return array_merge( $default_color, $edunet_color );
+}
+
+
+
+// Уточняем типографику
+
+add_filter( 'generate_font_option_defaults', 'edunet_font_customizer', 10, 1 );
+
+function edunet_font_customizer( $default_font_options ) 
+{
+
+		$edunet_font_options = array(
+			'font_body' => 'Open Sans',
+			'font_body_category' => 'sans-serif',
+			'font_body_variants' => '300,300italic,regular,italic,600,600italic,700,700italic,800,800italic',
+			'body_font_weight' => 'normal',
+			'body_font_transform' => 'none',
+			'body_font_size' => '17',
+			'font_site_title' => 'inherit',
+			'font_site_title_category' => '',
+			'font_site_title_variants' => '',
+			'site_title_font_weight' => 'bold',
+			'site_title_font_transform' => 'none',
+			'site_title_font_size' => '45',
+			'mobile_site_title_font_size' => '30',
+			'font_site_tagline' => 'inherit',
+			'font_site_tagline_category' => '',
+			'font_site_tagline_variants' => '',
+			'site_tagline_font_weight' => 'normal',
+			'site_tagline_font_transform' => 'none',
+			'site_tagline_font_size' => '15',
+			'font_navigation' => 'inherit',
+			'font_navigation_category' => '',
+			'font_navigation_variants' => '',
+			'navigation_font_weight' => 'normal',
+			'navigation_font_transform' => 'none',
+			'navigation_font_size' => '15',
+			'font_widget_title' => 'inherit',
+			'font_widget_title_category' => '',
+			'font_widget_title_variants' => '',
+			'widget_title_font_weight' => 'normal',
+			'widget_title_font_transform' => 'none',
+			'widget_title_font_size' => '20',
+			'widget_content_font_size' => '15', //###
+			'font_heading_1' => 'inherit',
+			'font_heading_1_category' => '',
+			'font_heading_1_variants' => '',
+			'heading_1_weight' => '300',
+			'heading_1_transform' => 'none',
+			'heading_1_font_size' => '40',
+			'mobile_heading_1_font_size' => '30',
+			'font_heading_2' => 'inherit',
+			'font_heading_2_category' => '',
+			'font_heading_2_variants' => '',
+			'heading_2_weight' => '300',
+			'heading_2_transform' => 'none',
+			'heading_2_font_size' => '30',
+			'mobile_heading_2_font_size' => '25',
+			'font_heading_3' => 'inherit',
+			'font_heading_3_category' => '',
+			'font_heading_3_variants' => '',
+			'heading_3_weight' => 'normal',
+			'heading_3_transform' => 'none',
+			'heading_3_font_size' => '20',
+			'footer_font_size' => '16'
+		);
+
+	return array_merge( $default_font_options, $edunet_font_options );
+}
+
+
+
 endif;
